@@ -15,14 +15,14 @@ $recentListings = [
 ];
 
 // Получение последних компаний
-$recentCompanies = $db->getLatest('companies', 3, 'created_at DESC', 'status = ?', ['active']);
+$recentCompanies = $db->getLatest('companies', 3, 'created_at DESC');
 
 // Статистика портала
 $stats = [
     'total_listings' => $db->count('listings', 'status = ?', ['active']),
-    'total_companies' => $db->count('companies', 'status = ?', ['active']),
+    'total_companies' => $db->count('companies'),
     'total_categories' => $db->count('categories', 'parent_id IS NULL'),
-    'total_users' => $db->count('users', 'status = ?', ['active'])
+    'total_users' => $db->count('users', 'is_blocked = ?', [0])
 ];
 ?>
 <!DOCTYPE html>
